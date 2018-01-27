@@ -13,8 +13,29 @@ app.use(express.static(path.join(__dirname, '../public')));
 io.on('connection', (socket) => {
   console.log('New user connected');
 
+  // socket.emit('newMessage', {
+  //   from: 'kelvin.elechukwu@gmail.com',
+  //   text: 'Hey, how are you doing?',
+  //   createdAt: new Date().toString()
+  // });
 
-  socket.emit('newEmail');
+  socket.on('createMessage', function(message) {
+    console.log('create message', message);
+    io.emit('newMessage', {
+      from: message.from,
+      text: message.text,
+      createdAt: new Date().toString()
+    });
+  });
+  // socket.emit('newEmail', {
+  //   from: 'joseph@gmail.com',
+  //   message: 'Message from Joseph',
+  //   received: new Date().toString()
+  // });
+
+  // socket.on('createEmail', (newEmail) => {
+  //   console.log('createEmail', newEmail);
+  // });
 
   socket.on('disconnect', () => {
     console.log('User was disconnected');
