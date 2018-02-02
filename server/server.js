@@ -4,7 +4,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 var favicon = require('serve-favicon');
 
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 const port = process.env.PORT || 3000;
 var app = express();
 
@@ -26,6 +26,12 @@ io.on('connection', (socket) => {
     console.log('create message', message);
     io.emit('newMessage', generateMessage(message.from, message.text));
     callback('This is from the server');
+  });
+
+  socket.on('createLocationMessage', (coords) => {
+    // io.emit('newMessage',
+    // generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
   });
 
   socket.on('disconnect', () => {
