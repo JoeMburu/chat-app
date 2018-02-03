@@ -9,19 +9,28 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="/css/styles.css" />
 
   </head>
-  <body>
-    <p><h1>Welcome to the chat app</h1></p>
-    <ol id="messages"></ol>
-    <form id="message-form">
-      <input name="message" type="text" placeholder="Message" />
+  <body class="chat">
 
-      <button>Send</button>
-    </form>
-    <button id="send-location">Send Location</button>
+    <div class="chat__sidebar">
+      <h3>People</h3>
+      <div id="users"></div>
+    </div>
 
+    <div class="chat__main">
+      <ol id="messages" class="chat__messages"></ol>
+
+      <div class="chat__footer">
+        <form id="message-form">
+          <input name="message" type="text" placeholder="Message" autofocus autocomplete="off" />
+          <button>Send</button>
+        </form>
+      </div>
+
+      <button id="send-location">Send location</button>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
